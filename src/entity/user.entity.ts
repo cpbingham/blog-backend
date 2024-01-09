@@ -14,5 +14,11 @@ export class User {
     email: string
 
     @Column()
-    password: string
+    salt: string
+
+    @Column({
+        type: "varchar",
+        length: 1024
+    })
+    hash: string
 }

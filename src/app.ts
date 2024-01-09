@@ -1,6 +1,4 @@
 import express from 'express';
-// import {Request, Response} from 'express';
-// import { User } from './entity/user.entity';
 import { myDataSource } from './app-data-source';
 import { Posts } from './routes/posts'
 import {Comments} from './routes/comments'

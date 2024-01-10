@@ -1,9 +1,9 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import { DataSourceOptions } from 'typeorm';
-import app, {dbConnect} from './app'
+import { createAppInstance, getAppInstance } from './appInstance';
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT ? parseInt(process.env.PORT) : 3000
 
 const dataSourceOptions: DataSourceOptions = {
     type: "mysql",
@@ -16,8 +16,16 @@ const dataSourceOptions: DataSourceOptions = {
     synchronize: true, 
 }
 
-dbConnect(dataSourceOptions)
+const initAppAndListen = async () => {
+    let app = getAppInstance()
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-})
+
+    if (!app) {
+        app = createAppInstance(dataSourceOptions)
+        await app.initializeApp()
+    }
+
+    await app.startListening(port)
+}
+
+initAppAndListen()

@@ -1,0 +1,1 @@
+{"version":3,"file":"appInstance.js","sourceRoot":"","sources":["../src/appInstance.ts"],"names":[],"mappings":";;;;;;AACA,gDAAwB;AAExB,IAAI,WAAgB,CAAA;AAEb,MAAM,iBAAiB,GAAG,CAC7B,iBAAoC,EACjC,EAAE;IACL,WAAW,GAAG,IAAI,aAAG,CAAC,iBAAiB,CAAC,CAAA;IACxC,OAAO,WAAW,CAAA;AACtB,CAAC,CAAA;AALY,QAAA,iBAAiB,qBAK7B;AAEM,MAAM,cAAc,GAAG,GAAQ,EAAE,CAAC,WAAW,CAAA;AAAvC,QAAA,cAAc,kBAAyB"}

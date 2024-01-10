@@ -3,17 +3,50 @@ import {default as routes} from './routes'
 import { DataSourceOptions } from 'typeorm';
 import DatabaseManager from './db';
 
-export let dbManager: DatabaseManager
+class App {
+    public app: Application
+    public dbManager: DatabaseManager
 
-export const dbConnect = async (dataSourceOptions: DataSourceOptions) => {
-    dbManager = new DatabaseManager(dataSourceOptions)
-    await dbManager.initializeDataSource()
+    private server
+
+    constructor(dataSourceOptions: DataSourceOptions) {
+        this.app = express()
+        this.dbManager = new DatabaseManager(dataSourceOptions)
+    }
+
+    public startListening(port: number) {
+        this.server = this.app.listen(port, () => {
+            console.log(`Server is running on port ${port}`)
+        })
+    }
+
+    public stopListening() {
+        if (this.server) {
+            this.server.close(() => {})
+        }
+    }
+
+    private async dbConnect(): Promise<void> {
+        try {
+            await this.dbManager.initializeDataSource()
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    private setupMiddleware() {
+        this.app.use(express.json())
+    }
+
+    private setupRoutes() {
+        this.app.use('/', routes)
+    }
+
+    public async initializeApp(): Promise<void> {
+        await this.dbConnect()
+        this.setupMiddleware()
+        this.setupRoutes()
+    }
 }
 
-const app: Application = express();
-
-app.use(express.json());
-
-app.use('/', routes)
-
-export default app
+export default App

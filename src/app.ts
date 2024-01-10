@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Application} from 'express';
 import { myDataSource } from './app-data-source';
 import { Posts } from './routes/posts'
 import {Comments} from './routes/comments'
@@ -14,7 +14,7 @@ myDataSource
         console.error("Error during Data Source initialization:", err)
     })
 
-const app = express();
+const app: Application = express();
 app.use(express.json());
 
 const port = 3000;

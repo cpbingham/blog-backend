@@ -27,4 +27,5 @@ app.use('/auth', auth_1.Auth);
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
 });
+exports.default = app;
 //# sourceMappingURL=app.js.map

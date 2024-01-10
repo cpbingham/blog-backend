@@ -1,7 +1,7 @@
 import express, {Application} from 'express';
 import {default as routes} from './routes'
 import { DataSourceOptions } from 'typeorm';
-import DatabaseManager from './db';
+import DatabaseManager from './dbManager';
 
 class App {
     public app: Application

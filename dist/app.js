@@ -14,11 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const routes_1 = __importDefault(require("./routes"));
-const db_1 = __importDefault(require("./db"));
+const dbManager_1 = __importDefault(require("./dbManager"));
 class App {
     constructor(dataSourceOptions) {
         this.app = (0, express_1.default)();
-        this.dbManager = new db_1.default(dataSourceOptions);
+        this.dbManager = new dbManager_1.default(dataSourceOptions);
     }
     startListening(port) {
         this.server = this.app.listen(port, () => {

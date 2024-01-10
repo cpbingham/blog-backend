@@ -1,8 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
-import app from './app'
 import { DataSourceOptions } from 'typeorm';
-import DatabaseManager from './db';
+import app, {dbConnect} from './app'
 
 const port = process.env.PORT || 3000
 
@@ -17,8 +16,7 @@ const dataSourceOptions: DataSourceOptions = {
     synchronize: true, 
 }
 
-const dbManager: DatabaseManager = new DatabaseManager(dataSourceOptions)
-dbManager.initializeDataSource();
+dbConnect(dataSourceOptions)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

@@ -1,30 +1,13 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Posts = void 0;
 const express_1 = __importDefault(require("express"));
-const post_entity_1 = require("../entity/post.entity");
-const app_data_source_1 = require("../app-data-source");
+const post_1 = __importDefault(require("../controllers/post"));
 const router = express_1.default.Router();
-exports.Posts = router;
-router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const posts = yield app_data_source_1.myDataSource.getRepository(post_entity_1.Post).find();
-    res.json(posts);
-}));
-router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const post = yield app_data_source_1.myDataSource.getRepository(post_entity_1.Post).create(req.body);
-    const results = yield app_data_source_1.myDataSource.getRepository(post_entity_1.Post).save(post);
-    return res.send(results);
-}));
+const Controller = new post_1.default();
+router.get('/', Controller.getAllPosts);
+router.post('/', Controller.createPost);
+exports.default = router;
 //# sourceMappingURL=posts.js.map

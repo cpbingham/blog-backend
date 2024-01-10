@@ -1,19 +1,11 @@
 import express from 'express'
-import { Request, Response } from 'express'
-import { User } from '../entity/user.entity'
-import { myDataSource } from '../app-data-source'
+import UserController from '../controllers/users'
 
 const router = express.Router()
+const Controller = new UserController()
 
-router.get('/', async (req: Request, res: Response) => {
-    const users = await myDataSource.getRepository(User).find()
-    res.json(users)
-})
+router.get('/', Controller.getAllUsers)
 
-router.post('/', async(req: Request, res: Response) => {
-    const user = await myDataSource.getRepository(User).create(req.body)
-    const results = await myDataSource.getRepository(User).save(user)
-    res.json(results)
-})
+router.post('/', Controller.createUser)
 
-export {router as Users}
+export default router

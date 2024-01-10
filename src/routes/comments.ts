@@ -1,20 +1,12 @@
 import express from 'express'
-import { Request, Response } from 'express'
-import { Comment } from '../entity/comment.entity'
-import { myDataSource } from '../app-data-source'
+import CommentController from '../controllers/comment'
 
 const router = express.Router()
+const Controller = new CommentController()
 
-router.get('/', async (req: Request, res: Response) => {
-    const posts = await myDataSource.getRepository(Comment).find()
-    res.json(posts)
-})
+router.get('/', Controller.getAllComments)
 
-router.post('/', async(req: Request, res: Response) => {
-    const post = await myDataSource.getRepository(Comment).create(req.body)
-    const results = await myDataSource.getRepository(Comment).save(post)
-    return res.send(results)
-})
+router.post('/', Controller.createComment)
 
 
-export {router as Comments}  
+export default router 

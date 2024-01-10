@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.myDataSource = void 0;
 const typeorm_1 = require("typeorm");
-const user_entity_1 = require("./entity/user.entity");
-const post_entity_1 = require("./entity/post.entity");
-const comment_entity_1 = require("./entity/comment.entity");
+const user_1 = require("./models/user");
+const post_1 = require("./models/post");
+const comment_1 = require("./models/comment");
 exports.myDataSource = new typeorm_1.DataSource({
     type: "mysql",
     host: "localhost",
@@ -12,7 +12,7 @@ exports.myDataSource = new typeorm_1.DataSource({
     username: "root",
     password: "root",
     database: "blog",
-    entities: [user_entity_1.User, post_entity_1.Post, comment_entity_1.Comment],
+    entities: [user_1.User, post_1.Post, comment_1.Comment],
     logging: true,
     synchronize: true,
 });

@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
-import { User } from "./entity/user.entity";
-import { Post } from "./entity/post.entity";
-import { Comment } from "./entity/comment.entity";
+import {User}  from "./models/user";
+import { Post } from "./models/post";
+import { Comment } from "./models/comment";
 
 export const myDataSource = new DataSource({
     type: "mysql",

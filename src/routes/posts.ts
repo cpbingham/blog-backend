@@ -1,20 +1,11 @@
 import express from 'express'
-import { Request, Response } from 'express'
-import { Post } from '../entity/post.entity'
-import { myDataSource } from '../app-data-source'
+import PostController from '../controllers/post'
 
 const router = express.Router()
+const Controller = new PostController()
 
-router.get('/', async (req: Request, res: Response) => {
-    const posts = await myDataSource.getRepository(Post).find()
-    res.json(posts)
-})
+router.get('/', Controller.getAllPosts)
 
-router.post('/', async(req: Request, res: Response) => {
-    const post = await myDataSource.getRepository(Post).create(req.body)
-    const results = await myDataSource.getRepository(Post).save(post)
-    return res.send(results)
-})
+router.post('/', Controller.createPost)
 
-
-export {router as Posts}  
+export default router

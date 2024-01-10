@@ -37,12 +37,23 @@ class UserController {
     }
     getAllUsers(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const page = Number(req.query.page) || 1;
+            const itemPerPage = Number(req.query.itemPerPage) || 10;
             try {
-                const users = yield models_1.User.find();
+                const usersAndCount = yield models_1.User.findAndCount({
+                    skip: (page - 1) * itemPerPage,
+                    take: itemPerPage
+                });
                 res.status(200).json({
                     status: "ok",
                     message: "created",
-                    data: users,
+                    data: usersAndCount[0],
+                    paging: {
+                        page: page,
+                        itemPerPage: itemPerPage,
+                        itemCount: usersAndCount[1],
+                        lastPage: Math.ceil(usersAndCount[1] / itemPerPage)
+                    }
                 });
             }
             catch (error) {

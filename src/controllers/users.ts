@@ -26,12 +26,24 @@ export default class UserController {
     }
 
     public async getAllUsers(req: Request, res: Response) {
+        const page = Number(req.query.page) || 1
+        const itemPerPage = Number(req.query.itemPerPage) || 10
+
         try {
-            const users = await User.find()
+            const usersAndCount = await User.findAndCount({
+                skip: (page - 1) * itemPerPage,
+                take: itemPerPage
+            })
             res.status(200).json({
               status: "ok",
               message: "created",
-              data: users,
+              data: usersAndCount[0],
+              paging: {
+                page: page,
+                itemPerPage: itemPerPage,
+                itemCount: usersAndCount[1],
+                lastPage: Math.ceil(usersAndCount[1] / itemPerPage)
+              }
             })
           } catch (error) {
             res.status(500).json({

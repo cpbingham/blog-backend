@@ -35,6 +35,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => comment_1.Comment, (comment) => comment.post),
     __metadata("design:type", Array)
 ], Post.prototype, "comments", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)({ type: 'timestamp', default: null, nullable: true }),
+    __metadata("design:type", Date)
+], Post.prototype, "deletedAt", void 0);
 exports.Post = Post = __decorate([
     (0, typeorm_1.Entity)()
 ], Post);

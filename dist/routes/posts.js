@@ -9,5 +9,6 @@ const router = express_1.default.Router();
 const Controller = new post_1.default();
 router.get('/', Controller.getAllPosts);
 router.post('/', Controller.createPost);
+router.delete('/:id', Controller.deletePost);
 exports.default = router;
 //# sourceMappingURL=posts.js.map

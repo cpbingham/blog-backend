@@ -76,7 +76,6 @@ class UserController {
                     });
                     return;
                 }
-                console.log('hello');
                 yield user.softRemove();
                 res.status(200).json({
                     status: "ok",

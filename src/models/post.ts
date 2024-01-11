@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany, BaseEntity } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, OneToMany, BaseEntity, DeleteDateColumn } from "typeorm";
 import { Comment } from "./comment";
 
 @Entity()
@@ -17,4 +17,7 @@ export class Post extends BaseEntity {
 
     @OneToMany(() => Comment, (comment) => comment.post)
     comments: Comment[]
+
+    @DeleteDateColumn({ type: 'timestamp', default: null, nullable: true })
+    deletedAt: Date
 }

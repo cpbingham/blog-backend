@@ -45,4 +45,30 @@ export default class UserController {
             })
           }
     }
+
+    public async deletePost(req: Request, res: Response) {
+      try {
+          const post = await Post.findOneBy({ id: parseInt(req.params.id) })
+          if (!post) {                
+              res.status(400).json({
+                  status: 'not_found',
+                  message: 'post not found'
+              })
+              return
+          }    
+          
+          await post.softRemove()
+          res.status(200).json({
+              status: "ok",
+              message: "deleted",
+              data: post
+          })
+      } catch (error) {
+          res.status(500).json({
+              status: "failed",
+              message: "internal_server_error",
+              errors: error,
+          })
+      }
+  }
 }

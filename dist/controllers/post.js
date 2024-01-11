@@ -57,6 +57,33 @@ class UserController {
             }
         });
     }
+    deletePost(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const post = yield models_1.Post.findOneBy({ id: parseInt(req.params.id) });
+                if (!post) {
+                    res.status(400).json({
+                        status: 'not_found',
+                        message: 'post not found'
+                    });
+                    return;
+                }
+                yield post.softRemove();
+                res.status(200).json({
+                    status: "ok",
+                    message: "deleted",
+                    data: post
+                });
+            }
+            catch (error) {
+                res.status(500).json({
+                    status: "failed",
+                    message: "internal_server_error",
+                    errors: error,
+                });
+            }
+        });
+    }
 }
 exports.default = UserController;
 //# sourceMappingURL=post.js.map

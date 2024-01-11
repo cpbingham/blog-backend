@@ -35,12 +35,17 @@ class UserController {
     }
     getAllPosts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const page = Number(req.query.page) || 1;
+            const itemPerPage = Number(req.query.itemPerPage) || 10;
             try {
-                const posts = yield models_1.Post.find();
+                const postsAndCount = yield models_1.Post.findAndCount({
+                    skip: (page - 1) * itemPerPage,
+                    take: itemPerPage
+                });
                 res.status(200).json({
                     status: "ok",
                     message: "created",
-                    data: posts,
+                    data: postsAndCount,
                 });
             }
             catch (error) {

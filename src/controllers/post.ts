@@ -24,12 +24,18 @@ export default class UserController {
     }
 
     public async getAllPosts(req: Request, res: Response) {
+        const page = Number(req.query.page) || 1
+        const itemPerPage = Number(req.query.itemPerPage) || 10
+
         try {
-            const posts = await Post.find()
+            const postsAndCount = await Post.findAndCount({
+              skip: (page - 1) * itemPerPage,
+              take: itemPerPage 
+            })
             res.status(200).json({
               status: "ok",
               message: "created",
-              data: posts,
+              data: postsAndCount,
             })
           } catch (error) {
             res.status(500).json({

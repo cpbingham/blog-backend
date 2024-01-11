@@ -8,4 +8,6 @@ router.get('/', Controller.getAllUsers)
 
 router.post('/', Controller.createUser)
 
+router.delete('/:id', Controller.deleteUser)
+
 export default router

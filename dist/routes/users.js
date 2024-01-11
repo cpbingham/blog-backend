@@ -9,5 +9,6 @@ const router = express_1.default.Router();
 const Controller = new users_1.default();
 router.get('/', Controller.getAllUsers);
 router.post('/', Controller.createUser);
+router.delete('/:id', Controller.deleteUser);
 exports.default = router;
 //# sourceMappingURL=users.js.map

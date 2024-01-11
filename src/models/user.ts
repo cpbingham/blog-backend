@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, DeleteDateColumn } from "typeorm";
 import { IsEmail } from "class-validator";
  
 
@@ -22,4 +22,7 @@ export class User extends BaseEntity{
         length: 1024
     })
     hash: string
+
+    @DeleteDateColumn({ type: 'timestamp', default: null, nullable: true })
+    deletedAt: Date
 }

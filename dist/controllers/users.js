@@ -65,6 +65,34 @@ class UserController {
             }
         });
     }
+    deleteUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user = yield models_1.User.findOneBy({ id: parseInt(req.params.id) });
+                if (!user) {
+                    res.status(400).json({
+                        status: 'not_found',
+                        message: 'user not found'
+                    });
+                    return;
+                }
+                console.log('hello');
+                yield user.softRemove();
+                res.status(200).json({
+                    status: "ok",
+                    message: "deleted",
+                    data: user
+                });
+            }
+            catch (error) {
+                res.status(500).json({
+                    status: "failed",
+                    message: "internal_server_error",
+                    errors: error,
+                });
+            }
+        });
+    }
 }
 exports.default = UserController;
 //# sourceMappingURL=users.js.map

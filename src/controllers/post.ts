@@ -7,6 +7,8 @@ export default class UserController {
             const post: Post = new Post()
             post.title = req.body.title
             post.body = req.body.body
+            post.userId = req.body.userId
+            post.user = req.body.userId
             await post.save()
 
             res.status(201).json({

@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
+const post_1 = require("./post");
 let User = class User extends typeorm_1.BaseEntity {
 };
 exports.User = User;
@@ -39,6 +40,10 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], User.prototype, "hash", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => post_1.Post, (post) => post.user),
+    __metadata("design:type", Array)
+], User.prototype, "posts", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)({ type: 'timestamp', default: null, nullable: true }),
     __metadata("design:type", Date)

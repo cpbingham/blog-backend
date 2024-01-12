@@ -17,6 +17,8 @@ class UserController {
                 const post = new models_1.Post();
                 post.title = req.body.title;
                 post.body = req.body.body;
+                post.userId = req.body.userId;
+                post.user = req.body.userId;
                 yield post.save();
                 res.status(201).json({
                     status: 'ok',

@@ -42,7 +42,10 @@ class UserController {
             try {
                 const usersAndCount = yield models_1.User.findAndCount({
                     skip: (page - 1) * itemPerPage,
-                    take: itemPerPage
+                    take: itemPerPage,
+                    relations: {
+                        posts: true
+                    }
                 });
                 res.status(200).json({
                     status: "ok",

@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Post = void 0;
 const typeorm_1 = require("typeorm");
 const comment_1 = require("./comment");
+const user_1 = require("./user");
 let Post = class Post extends typeorm_1.BaseEntity {
 };
 exports.Post = Post;
@@ -31,6 +32,15 @@ __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Post.prototype, "created", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], Post.prototype, "userId", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_1.User, (user) => user.posts),
+    (0, typeorm_1.JoinColumn)({ name: 'userId' }),
+    __metadata("design:type", user_1.User)
+], Post.prototype, "user", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => comment_1.Comment, (comment) => comment.post),
     __metadata("design:type", Array)

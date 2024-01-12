@@ -18,6 +18,8 @@ class CommentController {
                 comment.body = req.body.body;
                 comment.postId = req.body.postId;
                 comment.post = req.body.postId;
+                comment.userId = req.body.userId;
+                comment.user = req.body.userId;
                 yield comment.save();
                 res.status(201).json({
                     status: 'ok',

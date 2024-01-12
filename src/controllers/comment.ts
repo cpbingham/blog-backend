@@ -8,6 +8,8 @@ export default class CommentController {
             comment.body = req.body.body
             comment.postId = req.body.postId
             comment.post = req.body.postId
+            comment.userId = req.body.userId
+            comment.user = req.body.userId
             await comment.save()
 
             res.status(201).json({

@@ -16,6 +16,8 @@ class CommentController {
             try {
                 const comment = new models_1.Comment();
                 comment.body = req.body.body;
+                comment.postId = req.body.postId;
+                comment.post = req.body.postId;
                 yield comment.save();
                 res.status(201).json({
                     status: 'ok',
@@ -40,6 +42,33 @@ class CommentController {
                     status: "ok",
                     message: "created",
                     data: comments,
+                });
+            }
+            catch (error) {
+                res.status(500).json({
+                    status: "failed",
+                    message: "internal_server_error",
+                    errors: error,
+                });
+            }
+        });
+    }
+    deleteComment(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const comment = yield models_1.Comment.findOneBy({ id: parseInt(req.params.id) });
+                if (!comment) {
+                    res.status(400).json({
+                        status: 'not_found',
+                        message: 'comment not found'
+                    });
+                    return;
+                }
+                yield comment.softRemove();
+                res.status(200).json({
+                    status: "ok",
+                    message: "deleted",
+                    data: comment
                 });
             }
             catch (error) {

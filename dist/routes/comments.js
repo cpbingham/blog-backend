@@ -9,5 +9,6 @@ const router = express_1.default.Router();
 const Controller = new comment_1.default();
 router.get('/', Controller.getAllComments);
 router.post('/', Controller.createComment);
+router.delete('/:id', Controller.deleteComment);
 exports.default = router;
 //# sourceMappingURL=comments.js.map

@@ -24,9 +24,18 @@ __decorate([
     __metadata("design:type", String)
 ], Comment.prototype, "body", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], Comment.prototype, "postId", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => post_1.Post, (post) => post.comments),
+    (0, typeorm_1.JoinColumn)({ name: "postId" }),
     __metadata("design:type", post_1.Post)
 ], Comment.prototype, "post", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)({ type: 'timestamp', default: null, nullable: true }),
+    __metadata("design:type", Date)
+], Comment.prototype, "deletedAt", void 0);
 exports.Comment = Comment = __decorate([
     (0, typeorm_1.Entity)()
 ], Comment);
